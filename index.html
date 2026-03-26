@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/sabzlogo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabz - Learn & Play Together</title>
+  </head>
+  <body>
+    <!-- Hidden forms for Netlify to detect at build time -->
+    <form name="sabz-waitlist" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="sabz-waitlist" />
+      <input type="hidden" name="bot-field" />
+      <input type="email" name="email" required />
+    </form>
+    
+    <form name="sabz-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="sabz-contact" />
+      <input type="hidden" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <textarea name="message" required></textarea>
+    </form>
+    
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
