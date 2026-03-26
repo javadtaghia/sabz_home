@@ -183,14 +183,44 @@ export default function SabzLandingPage() {
         .tag-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(161,206,106,0.18); border: 1px solid rgba(62,86,34,0.14); border-radius: 100px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: ${theme.forest}; }
         .progress-bar-fill { height: 100%; border-radius: 99px; background: ${theme.orange}; width: 58%; }
         .logo-img { height: 52px; width: auto; object-fit: contain; }
+        @media (max-width: 1024px) {
+          .hero-shell { gap: 44px !important; padding: 64px 24px 72px !important; }
+          .how-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+          .how-video { width: 100% !important; height: auto !important; max-height: 620px !important; }
+          .section-shell { padding: 64px 24px !important; }
+        }
         @media (max-width: 768px) {
+          .nav-shell { padding: 0 16px !important; height: 62px !important; }
+          .hero-shell { padding: 48px 16px 56px !important; gap: 28px !important; }
           .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-logo-main { height: 84px !important; }
           .features-grid { grid-template-columns: 1fr 1fr !important; }
           .levels-grid { grid-template-columns: 1fr !important; }
           .bottom-grid { grid-template-columns: 1fr !important; }
+          .topics-grid { grid-template-columns: 1fr !important; }
+          .hero-actions { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+          .hero-actions a { width: 100% !important; }
+          .hero-actions button { width: 100% !important; justify-content: center !important; }
+          .hero-tags { gap: 8px !important; }
+          .section-shell { padding: 56px 16px !important; }
+          .section-title { font-size: 32px !important; }
           .nav-links { display: none !important; }
           .hero-h1 { font-size: 36px !important; }
+          .hero-text { font-size: 16px !important; line-height: 1.65 !important; }
+          .mockup-shell { max-width: 560px; margin: 0 auto; }
+          .input-field { font-size: 16px !important; }
           .float-badge { display: none !important; }
+          .privacy-modal { padding: 12px !important; }
+          .privacy-content { padding: 22px !important; border-radius: 18px !important; max-height: 88vh !important; }
+          .footer-shell { padding: 20px 16px !important; justify-content: center !important; }
+          .footer-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 14px !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-h1 { font-size: 31px !important; }
+          .section-title { font-size: 28px !important; }
+          .features-grid { grid-template-columns: 1fr !important; }
+          .tag-pill { font-size: 12px !important; }
+          .hero-logo-main { height: 74px !important; }
         }
       `}</style>
 
@@ -202,7 +232,7 @@ export default function SabzLandingPage() {
         backdropFilter: "blur(16px)",
         transition: "background 0.3s, border-color 0.3s",
       }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+        <div className="nav-shell" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
           <a href="#hero" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
             <img
               src={LOGO_SRC}
@@ -238,7 +268,7 @@ export default function SabzLandingPage() {
             background: "radial-gradient(circle at 10% 20%, rgba(161,206,106,0.28) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(250,139,37,0.16) 0%, transparent 40%)",
           }} />
 
-          <div className={`hero-grid fade-up ${visible ? "visible" : ""}`} style={{
+          <div className={`hero-grid hero-shell fade-up ${visible ? "visible" : ""}`} style={{
             maxWidth: 1200, margin: "0 auto", padding: "80px 24px 100px",
             display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center",
             position: "relative", zIndex: 1,
@@ -246,7 +276,7 @@ export default function SabzLandingPage() {
             {/* LEFT */}
             <div>
               <div ref={heroLogoRef} style={{ marginBottom: 20 }}>
-                <img src={LOGO_SRC} alt="Sabz" style={{ height: 110, width: "auto", objectFit: "contain" }} />
+                <img src={LOGO_SRC} alt="Sabz" className="hero-logo-main" style={{ height: 110, width: "auto", objectFit: "contain" }} />
               </div>
 
               <div className="tag-pill" style={{ marginBottom: 20, fontSize: 17, fontWeight: 800 }}>
@@ -262,16 +292,16 @@ export default function SabzLandingPage() {
                 AI learning that feels like a game.
               </h1>
 
-              <p style={{ fontSize: 17, lineHeight: 1.75, color: theme.berry, maxWidth: 460, marginBottom: 36 }}>
+              <p className="hero-text" style={{ fontSize: 17, lineHeight: 1.75, color: theme.berry, maxWidth: 460, marginBottom: 36 }}>
                 Sabz helps you learn AI through short lessons, visual tasks, and game-like progress. Start simple, keep a streak, and grow at your own pace.
               </p>
 
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 32 }}>
+              <div className="hero-actions" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 32 }}>
                 <a href="#waitlist" style={{ textDecoration: "none" }}><button className="btn-primary">Join waitlist <ArrowRight size={15} /></button></a>
                 <a href="#how-it-works" style={{ textDecoration: "none" }}><button className="btn-outline"><PlayCircle size={15} /> See sample lessons</button></a>
               </div>
 
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <div className="hero-tags" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 {["Short daily lessons", "Beginner to advanced", "Game-based learning"].map((tag, i) => (
                   <div key={tag} style={{
                     background: i === 1 ? "rgba(161,206,106,0.18)" : "white",
@@ -286,7 +316,7 @@ export default function SabzLandingPage() {
             </div>
 
             {/* RIGHT — App mockup */}
-            <div className={`fade-up d2 ${visible ? "visible" : ""}`} style={{ position: "relative" }}>
+            <div className={`fade-up d2 mockup-shell ${visible ? "visible" : ""}`} style={{ position: "relative" }}>
               <div style={{
                 background: "white",
                 border: "1px solid rgba(82,23,48,0.10)",
@@ -396,10 +426,10 @@ export default function SabzLandingPage() {
           borderBottom: "1px solid rgba(82,23,48,0.07)",
           background: "linear-gradient(180deg, rgba(255,253,248,1) 0%, rgba(161,206,106,0.07) 100%)",
         }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
+          <div className="section-shell how-shell" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
             <div style={{ marginBottom: 52, maxWidth: 560 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: theme.forest, marginBottom: 12 }}>How it works</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15, marginBottom: 14 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15, marginBottom: 14 }}>
                 Simple lessons,<br /> clear progress.
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.75, color: theme.berry }}>
@@ -407,9 +437,10 @@ export default function SabzLandingPage() {
               </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 48, alignItems: "flex-start" }}>
+            <div className="how-grid" style={{ display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 48, alignItems: "flex-start" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <video
+                  className="how-video"
                   src="/sabz_video.mp4"
                   autoPlay
                   loop
@@ -450,11 +481,11 @@ export default function SabzLandingPage() {
         </section>
 
         {/* LEVELS */}
-        <section id="levels" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
+        <section id="levels" className="section-shell levels-shell" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 32, marginBottom: 44, flexWrap: "wrap" }}>
             <div style={{ maxWidth: 440 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: theme.forest, marginBottom: 12 }}>Learning paths</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15 }}>
                 Built for every stage of learning
               </h2>
             </div>
@@ -490,10 +521,10 @@ export default function SabzLandingPage() {
 
         {/* FEATURES */}
         <section id="features" style={{ background: `linear-gradient(140deg, ${theme.plum} 0%, ${theme.berry} 100%)` }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
+          <div className="section-shell features-shell" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
             <div style={{ marginBottom: 48, maxWidth: 480 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(161,206,106,0.9)", marginBottom: 12 }}>Why Sabz</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: "white", lineHeight: 1.15 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: "white", lineHeight: 1.15 }}>
                 Made for easy, repeatable AI learning
               </h2>
             </div>
@@ -526,13 +557,13 @@ export default function SabzLandingPage() {
         </section>
 
         {/* BOTTOM SECTION */}
-        <section id="waitlist" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
+        <section id="waitlist" className="section-shell waitlist-shell" style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px" }}>
           <div className="bottom-grid" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 24 }}>
             {/* Sample topics */}
             <div style={{ background: "white", border: "1px solid rgba(82,23,48,0.08)", borderRadius: 28, padding: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: theme.forest, marginBottom: 12 }}>Example topics</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 30, fontWeight: 700, color: theme.plum, marginBottom: 28 }}>What learners explore</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 30, fontWeight: 700, color: theme.plum, marginBottom: 28 }}>What learners explore</h2>
+              <div className="topics-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 {sampleLessons.map((lesson, i) => {
                   const c = lessonColors[i % 3];
                   return (
@@ -554,7 +585,7 @@ export default function SabzLandingPage() {
               background: "linear-gradient(160deg, rgba(161,206,106,0.18) 0%, rgba(255,255,255,1) 60%)",
             }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: theme.forest, marginBottom: 12 }}>Launch</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 30, fontWeight: 700, color: theme.plum, marginBottom: 14, lineHeight: 1.2 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 30, fontWeight: 700, color: theme.plum, marginBottom: 14, lineHeight: 1.2 }}>
                 Start your first learning streak
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.75, color: theme.berry, marginBottom: 28 }}>
@@ -603,10 +634,10 @@ export default function SabzLandingPage() {
 
         {/* CONTACT US */}
         <section id="contact" style={{ background: "linear-gradient(180deg, rgba(82,23,48,0.03) 0%, rgba(161,206,106,0.06) 100%)", borderTop: "1px solid rgba(82,23,48,0.07)" }}>
-          <div style={{ maxWidth: 800, margin: "0 auto", padding: "80px 24px" }}>
+          <div className="section-shell contact-shell" style={{ maxWidth: 800, margin: "0 auto", padding: "80px 24px" }}>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: theme.forest, marginBottom: 12 }}>Get in touch</div>
-              <h2 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15, marginBottom: 16 }}>
+              <h2 className="section-title" style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 38, fontWeight: 700, color: theme.plum, lineHeight: 1.15, marginBottom: 16 }}>
                 Have questions or feedback?
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.75, color: theme.berry }}>
@@ -676,11 +707,11 @@ export default function SabzLandingPage() {
 
       {/* PRIVACY POLICY MODAL */}
       {showPrivacy && (
-        <div style={{
+        <div className="privacy-modal" style={{
           position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 1000,
           display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
         }}>
-          <div style={{
+          <div className="privacy-content" style={{
             background: "white", borderRadius: 24, padding: 40, maxWidth: 600,
             maxHeight: "80vh", overflowY: "auto", position: "relative",
           }}>
@@ -729,14 +760,14 @@ export default function SabzLandingPage() {
 
       {/* FOOTER */}
       <footer style={{ background: theme.plum, borderTop: "1px solid rgba(82,23,48,0.08)" }}>
-        <div style={{
+        <div className="footer-shell" style={{
           maxWidth: 1200, margin: "0 auto", padding: "28px 24px",
           display: "flex", flexWrap: "wrap", alignItems: "center",
           justifyContent: "space-between", gap: 16,
         }}>
           <img src={LOGO_SRC} alt="Sabz" style={{ height: 44, width: "auto", objectFit: "contain" }} />
 
-          <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+          <div className="footer-links" style={{ display: "flex", gap: 24, alignItems: "center" }}>
             <button
               onClick={() => setShowPrivacy(true)}
               style={{ background: "none", border: "none", color: "rgba(255,255,255,0.65)", textDecoration: "none", fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}
