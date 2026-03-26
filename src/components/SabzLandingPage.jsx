@@ -76,6 +76,7 @@ export default function SabzLandingPage() {
   const [contactError, setContactError] = useState("");
   const [showPrivacy, setShowPrivacy] = useState(false);
   const heroLogoRef = useRef(null);
+  const currentYear = new Date().getFullYear();
   const apiBaseUrl = (
     import.meta.env.VITE_API_BASE_URL || "https://que5tzjtpa.execute-api.ap-southeast-2.amazonaws.com"
   ).trim().replace(/\/$/, "");
@@ -214,6 +215,7 @@ export default function SabzLandingPage() {
           .privacy-content { padding: 22px !important; border-radius: 18px !important; max-height: 88vh !important; }
           .footer-shell { padding: 20px 16px !important; justify-content: center !important; }
           .footer-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 14px !important; }
+          .footer-meta { justify-content: center !important; text-align: center; }
         }
         @media (max-width: 480px) {
           .hero-h1 { font-size: 31px !important; }
@@ -775,7 +777,23 @@ export default function SabzLandingPage() {
               Privacy
             </button>
             <a href="#contact" style={{ color: "rgba(255,255,255,0.65)", textDecoration: "none", fontSize: 14 }}>Contact</a>
+            <a href="mailto:hello@sabz.app" style={{ color: "rgba(255,255,255,0.65)", textDecoration: "none", fontSize: 14 }}>hello@sabz.app</a>
             <a href="https://sabz.app" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.65)", textDecoration: "none", fontSize: 14 }}>sabz.app</a>
+          </div>
+
+          <div className="footer-meta" style={{
+            width: "100%",
+            marginTop: 4,
+            paddingTop: 14,
+            borderTop: "1px solid rgba(255,255,255,0.12)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 10,
+            color: "rgba(255,255,255,0.58)",
+            fontSize: 13,
+          }}>
+            <span>Copyright (c) {currentYear} Sabz. All rights reserved.</span>
           </div>
         </div>
       </footer>
