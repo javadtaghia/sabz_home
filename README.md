@@ -44,10 +44,18 @@ For client-side routing fallback, add this rewrite in Amplify Console:
 - Target address: `/index.html`
 - Type: `200 (Rewrite)`
 
-### 4) Notes about forms
-- This project currently uses Netlify-style form attributes/submit flow.
-- On Amplify, those submissions will not be processed by Netlify Forms.
-- If you need form delivery on Amplify, connect forms to your own backend endpoint (API Gateway/Lambda) or a third-party form service.
+### 4) Forms API wiring (AWS CLI)
+- Run:
+  - `chmod +x scripts/deploy_forms_api.sh`
+  - `./scripts/deploy_forms_api.sh`
+- This creates/updates:
+  - DynamoDB tables `wishlist` and `emails` (PK: `email`) in `ap-southeast-2`
+  - Lambda functions `sabz-waitlist-handler` and `sabz-contact-handler`
+  - API Gateway HTTP API routes:
+    - `POST /waitlist`
+    - `POST /contact`
+- Set Amplify environment variable:
+  - `VITE_API_BASE_URL=https://que5tzjtpa.execute-api.ap-southeast-2.amazonaws.com`
 
 ## Sections
 - Hero — logo, headline, app mockup

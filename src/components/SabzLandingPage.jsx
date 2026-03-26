@@ -76,18 +76,32 @@ export default function SabzLandingPage() {
   const [contactError, setContactError] = useState("");
   const [showPrivacy, setShowPrivacy] = useState(false);
   const heroLogoRef = useRef(null);
+  const apiBaseUrl = (
+    import.meta.env.VITE_API_BASE_URL || "https://que5tzjtpa.execute-api.ap-southeast-2.amazonaws.com"
+  ).trim().replace(/\/$/, "");
 
-  const encodeFormData = (data) => new URLSearchParams(data).toString();
+  const submitApiForm = async (path, payload) => {
+    if (!apiBaseUrl) {
+      throw new Error("Missing VITE_API_BASE_URL");
+    }
 
-  const submitNetlifyForm = async (formName, data) => {
-    const response = await fetch("/", {
+    const response = await fetch(`${apiBaseUrl}${path}`, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encodeFormData({ "form-name": formName, ...data }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to submit ${formName}`);
+      let message = "Failed to submit.";
+      try {
+        const payload = await response.json();
+        if (payload?.error) {
+          message = payload.error;
+        }
+      } catch (error) {
+        // Ignore JSON parsing issues and keep generic message.
+      }
+      throw new Error(message);
     }
   };
 
@@ -96,11 +110,11 @@ export default function SabzLandingPage() {
     setWaitlistError("");
 
     try {
-      await submitNetlifyForm("sabz-waitlist", { email });
+      await submitApiForm("/waitlist", { email });
       setSubmitted(true);
       setEmail("");
     } catch (error) {
-      setWaitlistError("We couldn't send your email right now. Please try again.");
+      setWaitlistError(error.message || "We couldn't send your email right now. Please try again.");
     }
   };
 
@@ -114,11 +128,11 @@ export default function SabzLandingPage() {
     setContactError("");
 
     try {
-      await submitNetlifyForm("sabz-contact", contactFormData);
+      await submitApiForm("/contact", contactFormData);
       setContactSubmitted(true);
       setContactFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      setContactError("We couldn't send your message right now. Please try again.");
+      setContactError(error.message || "We couldn't send your message right now. Please try again.");
     }
   };
 
@@ -559,13 +573,9 @@ export default function SabzLandingPage() {
                 <form
                   name="sabz-waitlist"
                   method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
                   style={{ display: "flex", flexDirection: "column", gap: 12 }}
                   onSubmit={handleWaitlistSubmit}
                 >
-                  <input type="hidden" name="form-name" value="sabz-waitlist" />
-                  <input type="hidden" name="bot-field" />
                   <input
                     type="email"
                     name="email"
@@ -616,13 +626,9 @@ export default function SabzLandingPage() {
               <form
                 name="sabz-contact"
                 method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
                 style={{ display: "flex", flexDirection: "column", gap: 16 }}
                 onSubmit={handleContactSubmit}
               >
-                <input type="hidden" name="form-name" value="sabz-contact" />
-                <input type="hidden" name="bot-field" />
                 <input
                   type="text"
                   name="name"
